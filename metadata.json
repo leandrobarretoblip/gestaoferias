@@ -1,0 +1,5 @@
+{
+  "name": "Gestor de Férias DC",
+  "description": "Sistema de gestão de férias, folgas e licenças para times de DC (IA, UX, Full) com validação de capacidade e relatórios.",
+  "requestFramePermissions": []
+}
