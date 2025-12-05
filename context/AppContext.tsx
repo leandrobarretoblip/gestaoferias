@@ -4,6 +4,16 @@ import { AppState, AppAction, Specialty, RequestType, Employee, CalendarRequest,
 import { X, CheckCircle, AlertCircle } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 
+// Whitelist of allowed emails for the default password access
+const ACCESS_WHITELIST = [
+  'fernando.palumbo@blip.ai',
+  'giovana.pereira@blip.ai',
+  'julia.franco@blip.ai',
+  'leandro.barreto@blip.ai',
+  'amandar@blip.ai',
+  'willer@blip.ai'
+];
+
 const initialState: AppState = {
   currentUser: null,
   employees: [],
@@ -300,17 +310,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return false;
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     // --- SENHA PADRÃO / MASTER PASSWORD ---
-    // Bypass para facilitar acesso ou testes caso Auth não esteja configurado
+    // Bypass para facilitar acesso com a senha '1234' para usuários da whitelist
     if (password === '1234') {
-      dispatch({ type: 'LOGIN', payload: email });
-      showNotification(`Bem-vindo, ${email}! (Acesso Padrão)`, 'success');
-      return true;
+      if (ACCESS_WHITELIST.includes(normalizedEmail)) {
+        dispatch({ type: 'LOGIN', payload: normalizedEmail });
+        showNotification(`Bem-vindo, ${normalizedEmail}!`, 'success');
+        return true;
+      } else {
+        showNotification('Acesso negado: E-mail não autorizado para acesso com senha padrão.', 'error');
+        return false;
+      }
     }
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
+        email: normalizedEmail,
         password: password
       });
 
