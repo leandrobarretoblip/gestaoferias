@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, CalendarRange, ArrowRight, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { BlipLogo } from '../components/BlipLogo';
 
 const Login: React.FC = () => {
   const { login } = useAppContext();
@@ -23,11 +24,15 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row min-h-[500px]">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row min-h-[550px]">
         
         {/* Left Side: Public Access */}
         <div className="md:w-1/2 bg-gradient-to-br from-blue-600 to-blue-800 p-10 flex flex-col justify-center items-center text-center text-white relative">
-          <div className="bg-white/10 p-4 rounded-full mb-6 backdrop-blur-sm">
+          <div className="absolute top-8 left-8">
+            <BlipLogo className="h-8 w-auto" variant="white" />
+          </div>
+
+          <div className="bg-white/10 p-4 rounded-full mb-6 backdrop-blur-sm mt-8">
             <CalendarRange size={48} className="text-white" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Visão Geral</h2>
@@ -48,11 +53,9 @@ const Login: React.FC = () => {
         </div>
 
         {/* Right Side: Admin Login */}
-        <div className="md:w-1/2 p-10 flex flex-col justify-center bg-white">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 mb-4">
-              <Lock className="text-gray-600" size={20} />
-            </div>
+        <div className="md:w-1/2 p-10 flex flex-col justify-center bg-white relative">
+          <div className="flex flex-col items-center mb-8">
+            <BlipLogo className="h-10 w-auto mb-6" variant="color" />
             <h1 className="text-2xl font-bold text-gray-800">Área Restrita</h1>
             <p className="text-gray-500 text-sm mt-2">Login exclusivo para gestores e analistas.</p>
           </div>

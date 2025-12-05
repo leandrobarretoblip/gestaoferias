@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
@@ -11,6 +10,7 @@ import {
 } from '../utils';
 import { Specialty, RequestType } from '../types';
 import { LogIn, Calendar, ArrowLeft, LayoutGrid, ChevronLeft, ChevronRight, Users, AlertTriangle } from 'lucide-react';
+import { BlipLogo } from '../components/BlipLogo';
 
 const PublicOverview: React.FC = () => {
   const { state } = useAppContext();
@@ -258,15 +258,19 @@ const PublicOverview: React.FC = () => {
       {/* Header */}
       <header className="bg-slate-900 text-white p-6 shadow-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">GestorDC <span className="text-blue-500">.Public</span></h1>
-            <p className="text-xs text-slate-400">Visão de Capacidade & Férias</p>
+          <div className="flex items-center gap-3">
+            <BlipLogo className="h-8 w-auto" variant="white" />
+            <div className="h-6 w-px bg-slate-700 mx-1"></div>
+            <div>
+              <h1 className="text-lg font-bold tracking-tight text-white leading-none">Gestor de Férias</h1>
+              <p className="text-[10px] text-slate-400 uppercase tracking-wider">Visão Pública</p>
+            </div>
           </div>
           
           <div className="flex items-center gap-4">
             <Link 
               to="/login" 
-              className="flex items-center gap-2 px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-md text-sm font-medium transition-colors"
             >
               <ArrowLeft size={16} />
               Sair
